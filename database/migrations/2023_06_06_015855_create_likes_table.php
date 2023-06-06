@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('feed_id');
+            $table->foreign('feed_id')->references('id')->on('feeds');
             $table->timestamps();
         });
     }

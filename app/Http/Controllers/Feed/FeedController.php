@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Feed;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PostRequest;
+use App\Models\Feed;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
+use App\Http\Controllers\Controller;
 
 class FeedController extends Controller
 {
@@ -18,5 +19,16 @@ class FeedController extends Controller
         return response([
             'message' => "success"
         ], 201);
+    }
+
+    public function likePost($feedId)
+    {
+        //select feed with feed_id
+        $feed = Feed::whereId($feedId)->first();
+        if (!$feed) {
+            return response([
+                'message' => '404 Not Found',
+            ], 500);
+        }
     }
 }

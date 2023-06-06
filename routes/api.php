@@ -19,6 +19,8 @@ use App\Http\Controllers\Auth\AuthenticationController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('feed/store', [FeedController::class, 'store'])->middleware('auth:sanctum');
+Route::post('feed/like/{feed_id}', [FeedController::class, 'likePost'])->middleware('auth:sanctum');
 
 Route::get('/test', function(){
     return response([
@@ -28,4 +30,3 @@ Route::get('/test', function(){
 
 Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login', [AuthenticationController::class, 'login']);
-Route::post('feed/store', [FeedController::class, 'store'])->middleware('auth:sanctum');
